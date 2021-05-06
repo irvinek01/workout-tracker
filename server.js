@@ -2,19 +2,15 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-const router = require("./controllers");
-const path = require("path");
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
 app.use(logger("dev"));
-app.use(router);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
@@ -23,6 +19,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useFindAndModify: false,
 });
 
+app.use(require("./controllers/apiRoute"));
+app.use(require("./controllers/htmlRoute"));
+
 app.listen(PORT, () => {
-  console.log(`Web App Live on http://localhost/${PORT}`);
+  console.log(`Web App Live on http://localhost:${PORT}`);
 });
