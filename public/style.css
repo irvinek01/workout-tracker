@@ -17,8 +17,8 @@ body {
 }
 
 nav {
-  background-color: #5793fd;
-  color: #ffffff;
+  background-color: #57fdbd;
+  color: #47011eef;
   height: 80px;
   padding: 10px;
   line-height: 3;
@@ -33,7 +33,7 @@ a:visited {
   color: inherit;
 }
 
-nav a:hover{
+nav a:hover {
   opacity: 0.7;
 }
 
