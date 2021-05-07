@@ -1,3 +1,3 @@
 # workout-tracker
 
-https://git.heroku.com/aj-fitness-tracker.git
+https://aj-workout-tracker.herokuapp.com/
