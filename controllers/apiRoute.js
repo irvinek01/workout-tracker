@@ -2,7 +2,7 @@ const router = require("express").Router();
 const db = require("../models");
 
 // GET route last workout from db
-router.get("/api/workouts", async (req, res) => {
+router.get("/api/workouts/", async (req, res) => {
   try {
     const lastWorkout = await db.Workout.find({}).sort({ _id: 1 });
     res.status(200).json(lastWorkout);
@@ -11,11 +11,11 @@ router.get("/api/workouts", async (req, res) => {
   }
 });
 
-// Add exercises to the most recent workout plan.
+// Add exercises to workout.
 router.put("/api/workouts/:id", async (req, res) => {
   try {
     const addExercise = await db.Workout.findByIdAndUpdate(
-      req.param.id,
+      req.params.id,
       { $push: { exercises: req.body } },
       { new: true, runValidators: true }
     );
@@ -25,7 +25,7 @@ router.put("/api/workouts/:id", async (req, res) => {
   }
 });
 
-// Add new exercises to a new workout plan.
+// Add new workout.
 router.post("/api/workouts/", async (req, res) => {
   try {
     const newWorkout = await db.Workout.create(req.body);
